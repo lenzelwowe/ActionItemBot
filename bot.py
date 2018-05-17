@@ -10,7 +10,7 @@ token = os.environ['TELEGRAM_TOKEN']
 
 
 def start(bot, update):
-    update.message.reply_text("Hey! Got action items? Send them my way! Add me to a group with @ActionItemBot or send me your own personal list!\n\nUse _/ai [your action items, separated with periods]_\nTry _/ai@ActionItemBot [action items, separated with periods]_ when in groups.\n\nExamples:\n_\"/ai Get new action items. Do action items. Get more action items.\"\n\"/ai@ActionItemBot Buy twelve action items. Use nine action items. Sell 1 action item.\"_\n\nAction items remain until they're marked done!") 
+    update.message.reply_text("Hey! Got action items? Send them my way! Add me to a group with @ActionItemBot or send me your own personal list!\n\nUse _/ai [your action items, separated with periods]_\nTry _/ai@ActionItemBot [action items, separated with periods]_ when in groups.\n\nExamples:\n_\"/ai Get new action items. Do action items. Get more action items.\"\n\"/ai@ActionItemBot Buy twelve action items. Use nine action items. Sell 1 action item.\"_\n\nAction items remain until they're marked done!",parse_mode=ParseMode.MARKDOWN) 
 
 
 def new(bot, update):
