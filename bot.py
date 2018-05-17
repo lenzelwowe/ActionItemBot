@@ -55,6 +55,7 @@ def new(bot, update):
     bot.send_message(update.message.chat_id, "\nAction Items for " + strnow + "\n\n" + initialItems, reply_markup = reply_markup, parse_mode= ParseMode.MARKDOWN)
 
 def button(bot, update):
+    bot.answer_callback_query(update.callback_query.id)
     query = update.callback_query
     oglist = query.message.text_markdown
     user = query.from_user
