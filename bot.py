@@ -55,7 +55,6 @@ def new(bot, update):
     bot.send_message(update.message.chat_id, "\nAction Items for " + strnow + "\n\n" + initialItems, reply_markup = reply_markup, parse_mode= ParseMode.MARKDOWN)
 
 def button(bot, update):
-    bot.answer_callback_query(update.callback_query.id)
     query = update.callback_query
     oglist = query.message.text_markdown
     user = query.from_user
@@ -102,7 +101,7 @@ def button(bot, update):
         for i in range(0,itemCount):
             keyboard.append([InlineKeyboardButton("Mark (" + (str(i+1))+") completed!" , callback_data=i+1)])
     reply_markup = InlineKeyboardMarkup(keyboard)
-
+    bot.answer_callback_query(update.callback_query.id)
     bot.edit_message_text(reply_markup = reply_markup,chat_id=query.message.chat_id, message_id=query.message.message_id, text = new_text, parse_mode=ParseMode.MARKDOWN)
 
     
