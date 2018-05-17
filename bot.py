@@ -2,24 +2,15 @@ import os, time, datetime, re
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ParseMode
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
-
-# Example of your code beginning
-#           Config vars
 token = os.environ['TELEGRAM_TOKEN']
-#             ...
-
 
 def start(bot, update):
     update.message.reply_text("Hey! Got action items? Send them my way! Add me to a group with @ActionItemBot or send me your own personal list!\n\nUse _/ai [your action items, separated with periods]_\nTry _/ai@ActionItemBot [action items, separated with periods]_ when in groups.\n\nExamples:\n_\"/ai Get new action items. Do action items. Get more action items.\"\n\"/ai@ActionItemBot Buy twelve action items. Use nine action items. Sell 1 action item.\"_\n\nAction items remain until they're marked done. P.S. Check out my brother @AcknowledgedBot!",parse_mode=ParseMode.MARKDOWN) 
 
-
 def new(bot, update):
-    
     user = update.effective_user
-
     firstname = user['first_name']
     lastname = user['last_name']
-
     if firstname is None:
         name = lastname
     elif lastname is None:
@@ -28,7 +19,6 @@ def new(bot, update):
         name= firstname + ' ' + lastname[0]
 
     now=datetime.datetime.now()
-
     strnow = now.strftime("%A, %m/%d/%y")
 
     initialItems = ""
@@ -45,8 +35,7 @@ def new(bot, update):
             else:
                 newItem = i
             initialItems += '*(' + (str(idx+1)) + ') ' + newItem + '* by ' + name + '\n'
-        itemCount= idx
-
+            itemCount+=1
 
     keyboard =[]
     for i in range(0,itemCount):
@@ -58,20 +47,17 @@ def button(bot, update):
     query = update.callback_query
     oglist = query.message.text_markdown
     user = query.from_user
-
     firstname = user['first_name']
     lastname = user['last_name']
-
-    now=datetime.datetime.now()
-
-    strnow = now.strftime("%I:%M%p")
-
     if firstname is None:
         name = lastname
     elif lastname is None:
         name = firstname
     else:
         name= firstname + ' ' + lastname[0]
+    
+    now=datetime.datetime.now()
+    strnow = now.strftime("%I:%M%p")
 
     front = oglist.split('\n',2)
     firstpart = ''.join(front[0:2])
