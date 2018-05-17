@@ -10,7 +10,7 @@ token = os.environ['TELEGRAM_TOKEN']
 
 
 def start(bot, update):
-    update.message.reply_text("Hey! Got action items? Send them my way! Add me to a group with @ActionItemBot or send me your own personal list!\n\nUse /ai [your action items, separate with periods]\n\nExample:\n\"/ai Get new action items. Do action items. Get more action items.\"\n\nAction items remain until they're marked done!") 
+    update.message.reply_text("Hey! Got action items? Send them my way! Add me to a group with @ActionItemBot or send me your own personal list!\n\nUse /ai [your action items, separated with periods]\nTry '/ai@ActionItemBot [action items, separated with periods] when in groups.\n\nExamples:\n\"/ai Get new action items. Do action items. Get more action items.\"\n\"/ai@ActionItemBot Buy twelve action items. Use nine action items. Sell 1 action item.\"\n\nAction items remain until they're marked done!") 
 
 
 def new(bot, update):
@@ -115,6 +115,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('ai', new))
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CommandHandler('new', start))
+    updater.dispatcher.add_handler(CommandHandler('help', start))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))
 
     updater.start_polling()
